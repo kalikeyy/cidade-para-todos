@@ -1,0 +1,163 @@
+:root {
+  --cor-fundo-nav: #1b1b1b;
+  --cor-texto-nav: #fff;
+  --cor-hover-nav: #333333;
+  --cor-cadastro: #f57c33;
+  --cor-fundo-footer: #1b1b1b;
+  --cor-texto-footer: #fff;
+  --cor-secao-bg: #222;
+  --cor-texto: #fff;
+  --cor-card-bg: #2d73cb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--cor-secao-bg);
+  color: var(--cor-texto);
+}
+
+section {
+ padding: 80px 20px;
+  min-height: 100vh;
+}
+
+#bem-vindos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 100px; 
+  padding-bottom: 80px;
+  margin-top: 150px;
+}
+
+#bem-vindos h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#bem-vindos p {
+  font-size: 20px;
+  max-width: 600px;
+  margin-bottom: 80px;
+}
+
+.container .btn {
+  background-color: var(--cor-cadastro);
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.container .btn:hover {
+  background-color: #e26a1c;
+}
+
+.secao-servicos {
+  text-align: center;
+  padding: 0px 20px;
+}
+
+.titulo2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.descricao {
+  font-size: 20px;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  background-color: var(--cor-card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  width: 250px;
+  height: 340px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 150px;
+  height: 130px;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 18px;
+  color: #fff;
+}
+
+.Sobre-nos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+   padding: 30px 0px;
+}
+
+.texto {
+  flex: 1 1 45%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.texto h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.texto p {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.imagem {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.imagem img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+
+  .Sobre-nos {
+    flex-direction: column;
+  }
+
+  .texto, .imagem {
+    flex: 1 1 100%;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

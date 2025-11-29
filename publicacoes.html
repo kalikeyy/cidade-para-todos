@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minhas Publicações-Portal de Acessibilidade</title>
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="publicacoes.css">
+</head>
+
+<body>
+    <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+
+  <a href="publicar-local.html" class="btn-criar">+ Criar publicação</a>
+
+<h1 class="titulo">Minhas Publicações</h1>
+
+<div class="lista-publicacoes">
+
+  <div class="cartao-publicacao">
+    <img src="Café Harmonia.jpg" class="imagem-publicacao">
+
+    <div class="conteudo-publicacao">
+      <h2>Café Harmonia</h2>
+      <p class="texto-endereco">Rua das Flores, 128 — Centro</p>
+
+      <p class="titulo-horario">Horário de funcionamento:</p>
+      <p>08h às 20h</p>
+
+      <div class="avaliacao">
+        <span class="nota">5 ⭐</span>
+      </div>
+
+      <div class="botoes-acoes">
+        <button class="btn-editar">Editar</button>
+        <button class="btn-excluir" onclick="excluirPublicacao(this)">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cartao-publicacao">
+    <img src="Restaurante Jardim.jpg" class="imagem-publicacao">
+
+    <div class="conteudo-publicacao">
+      <h2>Restaurante Jardim</h2>
+      <p class="texto-endereco">Rua das Acácias, 210</p>
+
+      <p class="titulo-horario">Horário de funcionamento:</p>
+      <p>11h às 23h</p>
+
+      <div class="avaliacao">
+        <span class="nota">4 ⭐</span>
+      </div>
+
+      <div class="botoes-acoes">
+        <button class="btn-editar">Editar</button>
+        <button class="btn-excluir" onclick="excluirPublicacao(this)">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function excluirPublicacao(botao) {
+    const cartao = botao.closest(".cartao-publicacao");
+    if (confirm("Deseja realmente excluir esta publicação?")) {
+        cartao.remove();
+    }
+}
+</script>
+
+</body>
+</html>

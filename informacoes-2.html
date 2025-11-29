@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Serviço</title>
+    <link rel="stylesheet" href="informacoes.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+
+<header class="topo">
+    <img src="profissional-2.jpg" class="imagem-topo">
+    <div class="info-gerais">
+        <h2>INFORMAÇÕES GERAIS</h2>
+
+        <p><strong>NOME DO SERVIÇO:</strong>  TraduLibras – Suporte em Eventos</p>
+        <p><strong>PRESTADOR:</strong>João Henrique</p>
+        <p><strong>CIDADE:</strong> Curitiba – PR</p>
+        <p><strong>TELEFONE:</strong> (41) 99721-5532</p>
+        <p><strong>E-MAIL:</strong> ana.cuidabem@exemplo.com</p>
+    </div>
+</header>
+
+<section class="categoria-desc">
+    <p class="categoria"><strong>CATEGORIA:</strong> Cuidador / Acompanhante</p>
+    <p class="descricao">
+        Profissional certificada para acompanhar idosos e pessoas com deficiência em consultas, passeios,
+        compras, eventos e tarefas de rotina. Atuação com atenção, paciência e foco em autonomia.
+    </p>
+</section>
+
+<section class="valores">
+    <h2 class="titulo-section">VALORES</h2>
+
+    <div class="grade-valores">
+        <div class="valor-box" data-valor="Acompanhamento 3H — R$ 80,00">
+            ACOMPANHAMENTO 3H: R$ 90,00
+        </div>
+
+        <div class="valor-box" data-valor="Diária 8H — R$ 180,00">
+            DIÁRIA 8H: R$ 190,00
+        </div>
+
+        <div class="valor-box" data-valor="Visita rápida 1H — R$ 40,00">
+            VISITA RÁPIDA 1H: R$ 50,00
+        </div>
+    </div>
+
+    <button class="botao-prosseguir" id="btn-prosseguir" disabled>
+        PROSSEGUIR
+    </button>
+
+    <p id="selecionado" style="margin-top: 10px; font-size: 14px; opacity: 0.8;"></p>
+</section>
+
+
+   <div class="avaliacao">
+        <div class="titulo-secao">AVALIAÇÃO</div>
+
+        <div class="estrelas" id="estrelas">
+            <span class="estrela" data-valor="1">★</span>
+            <span class="estrela" data-valor="2">★</span>
+            <span class="estrela" data-valor="3">★</span>
+            <span class="estrela" data-valor="4">★</span>
+            <span class="estrela" data-valor="5">★</span>
+        </div>
+
+        <textarea id="comentario" placeholder="Escreva seu comentário..."></textarea>
+
+        <button onclick="limparCampos()">Enviar</button>
+    </div>
+
+</div>
+
+
+<script>
+let valorSelecionado = null;
+
+document.querySelectorAll(".valor-box").forEach(box => {
+    box.addEventListener("click", function () {
+
+        document.querySelectorAll(".valor-box").forEach(b => b.classList.remove("ativo"));
+
+        this.classList.add("ativo");
+
+        valorSelecionado = this.dataset.valor;
+        
+        document.getElementById("btn-prosseguir").disabled = false;
+
+        document.getElementById("selecionado").innerText =
+            "Selecionado: " + valorSelecionado;
+    });
+});
+
+document.getElementById("btn-prosseguir").addEventListener("click", () => {
+    if (valorSelecionado) {
+        window.location.href = "agendar.html?horario=" + encodeURIComponent(valorSelecionado);
+    }
+});
+
+let notaSelecionada = 0;
+
+document.querySelectorAll(".estrela").forEach(estrela => {
+    estrela.addEventListener("click", function () {
+        notaSelecionada = Number(this.dataset.valor);
+
+        document.querySelectorAll(".estrela").forEach(e => e.classList.remove("selecionada"));
+        for (let i = 0; i < notaSelecionada; i++) {
+            document.querySelectorAll(".estrela")[i].classList.add("selecionada");
+        }
+    });
+});
+
+function limparCampos() {
+    document.getElementById("comentario").value = "";
+    document.querySelectorAll(".estrela").forEach(e => e.classList.remove("selecionada"));
+    notaSelecionada = 0;
+}
+</script>
+
+</body>
+</html>

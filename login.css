@@ -1,0 +1,95 @@
+/* === CORES === */
+:root {
+  --bg: #1b1b1b;
+  --card: #2d73cb;
+  --texto: #ffffff;
+  --botao: #fc7a35;
+  --botao-hover: #ff8d54;
+  --titulo: #0f2c60;
+}
+
+/* === GERAL === */
+body {
+  margin-top: 137px;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+}
+
+/* === FORMULÁRIO === */
+.caixa {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 32px;
+  background-color: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+  text-align: center;
+  color: var(--titulo);
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff;
+  color: #000;
+  font-weight: 500;
+}
+
+/* === BOTÃO === */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--botao);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: var(--botao-hover);
+}
+
+/* === MENSAGEM === */
+.mensagem {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+/* === LINK === */
+.link-login {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.link-login a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 480px) {
+  .caixa {
+    margin: 20px;
+    padding: 20px;
+  }
+}

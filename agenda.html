@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda-Portal de Acessibilidade</title>
+<link rel="stylesheet" href="agenda.css" />
+<link rel="stylesheet" href="menu.css">
+</head>
+<body>
+<nav>
+  <div class="nav-esquerda">
+    <a href="inicio.html" class="logo">
+      <img src="logo.png" alt="Logo">
+    </a>
+    <div class="botoes-menu">
+      <a href="inicio.html">inicio</a>
+      <a href="local.html">local</a>
+      <a href="publicacoes.html">publicação</a>
+      <a href="servicos.html">serviços</a>
+      <a href="agenda.html">agenda</a>
+    </div>
+  </div>
+  <a href="perfil.html" class="perfil">
+    <img src="perfil.png" alt="Perfil">
+  </a>
+</nav>
+
+<div class="container">
+  <h1 class="titulo-principal">agenda</h1>
+  <div class="grid-agenda" id="agenda">
+    
+    <div class="cartao-agenda">
+      <h3>segunda - 09h-11h</h3>
+      <p><strong>Profissional:</strong> João (Guia de Mobilidade)</p>
+      <p><strong>Serviço:</strong> Acessibilidade para Deficientes Visuais</p>
+      <p><strong>Local:</strong> Rua Central, nº 123</p>
+      <button class="botao-cancelar">Cancelar</button>
+    </div>
+
+    <div class="cartao-agenda">
+      <h3>terça - 12h-14h</h3>
+      <p><strong>Profissional:</strong> Maria (Assistente Idosos)</p>
+      <p><strong>Serviço:</strong> Acompanhamento para Idosos</p>
+      <p><strong>Local:</strong> Praça da Liberdade</p>
+      <button class="botao-cancelar">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.botao-cancelar').forEach((btn)=>{
+    btn.addEventListener('click', ()=>{
+      const cartao = btn.closest('.cartao-agenda');
+      cartao.remove();
+    });
+  });
+</script>
+
+
+</body>
+</html>

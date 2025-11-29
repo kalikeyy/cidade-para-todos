@@ -1,0 +1,96 @@
+:root {
+    --cor-fundo: #1b1b1b;
+    --cor-card: #14427a;
+    --cor-texto: #ffffff;
+    --cor-input: #e6e6e6;
+    --cor-botao-salvar: #f57c33;
+    --cor-botao-cancelar: #555;
+    --cor-borda-card: #0e2d52;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    padding: 0;
+}
+
+.conteiner {
+    width: 850px;
+    margin: 40px auto;
+    background-color: var(--cor-card);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid var(--cor-borda-card);
+    margin-top: 130px;
+}
+
+.etiqueta {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.entrada {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 5px;
+    background-color: var(--cor-input);
+    font-size: 16px;
+}
+
+.caixa-botoes {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+.botao {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.botao-salvar {
+    background-color: var(--cor-botao-salvar);
+    color: #fff;
+}
+
+.botao-cancelar {
+    background-color: var(--cor-botao-cancelar);
+    color: #fff;
+}
+
+.botao:hover {
+    opacity: 0.9;
+}
+
+
+@media (max-width: 900px) {
+    .conteiner {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .botao {
+        width: 100%;
+        text-align: center;
+    }
+
+    .caixa-botoes {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,141 @@
+:root{
+  --fundo-pagina: #111213;
+  --fundo-cartao: #2d73cb;
+  --fundo-horario: #2f78d8;
+  --cor-destaque: #f9732b;
+  --branco: #ffffff;
+  --radius: 12px;
+  --padding-cartao: 16px;
+}
+
+*{
+  box-sizing: border-box;
+   margin:0; padding:0;
+  }
+  
+body{
+  font-family: sans-serif;
+  background: var(--fundo-pagina);
+  color: var(--branco);
+}
+
+.container{
+  max-width:900px;
+  margin:30px auto;
+  padding:20px;
+}
+
+.titulo-principal{
+  text-align:center;
+  margin-bottom:30px;
+  font-size:1.8rem;
+  margin-top: 130px;
+}
+
+.grid-agenda{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+.cartao-agenda{
+  background: var(--fundo-cartao);
+  padding: var(--padding-cartao);
+  border-radius: var(--radius);
+  width: calc(50% - 10px);
+  position: relative;
+}
+
+.cartao-agenda h3{
+  color: var(--cor-destaque);
+  margin-bottom:12px;
+  font-size:1.2rem;
+}
+
+.cartao-agenda p{
+  margin:4px 0;
+  font-size:1rem;
+}
+
+.botao-cancelar{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#e74c3c;
+  border:none;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.9rem;
+}
+
+.botao-cancelar:hover{
+  opacity:0.8;
+}
+
+@media(max-width:600px){
+  .cartao-agenda{
+    width: 100%;
+  }
+  .titulo-principal{font-size:1.5rem;}
+  .cartao-agenda h3{font-size:1rem;}
+  .cartao-agenda p{font-size:0.9rem;}
+  .botao-cancelar{font-size:0.8rem; padding:3px 6px;}
+}
+
+nav{
+  background: #1a4289;
+  color: var(--branco);
+  padding: 0.5rem 1.5rem;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+}
+
+.nav-esquerda{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:100px;
+  height:80px;
+  object-fit: contain;
+}
+
+.botoes-menu{
+  display:flex;
+  gap:10px;
+}
+
+.botoes-menu a{
+  text-decoration:none;
+  color: var(--branco);
+  font-weight:bold;
+  padding:6px 10px;
+  font-size:1.1rem;
+  transition: 0.3s;
+}
+
+.botoes-menu a:hover{
+  background: var(--fundo-horario);
+  border-radius:5px;
+}
+
+.perfil img{
+  width:40px;
+  height:30px;
+  border-radius:50%;
+}
+
+main{
+  margin-top:120px;
+   padding:20px;
+  }

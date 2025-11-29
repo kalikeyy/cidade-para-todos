@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dias e Horários-Portal de Acessibilidade</title>
+<link rel="stylesheet" href="agendar-horario.css" />
+<link rel="stylesheet" href="menu.css">
+</head>
+<body>
+      <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+  
+<div class="container">
+  <h1 class="titulo-principal">Dias e Horários Disponíveis</h1>
+
+<div class="grade-dias">
+  <div class="cartao-dia">
+    <h3>segunda</h3>
+    <button class="botao-horario" data-dia="segunda" data-horario="09h-11h" aria-checked="false">09h-11h</button>
+    <button class="botao-horario" data-dia="segunda" data-horario="13h-16h" aria-checked="false">13h-16h</button>
+    <button class="botao-horario" data-dia="segunda" data-horario="17h-20h" aria-checked="false">17h-20h</button>
+  </div>
+
+  <div class="cartao-dia">
+    <h3>terça</h3>
+    <button class="botao-horario" data-dia="terça" data-horario="08h-10h" aria-checked="false">08h-10h</button>
+    <button class="botao-horario" data-dia="terça" data-horario="12h-14h" aria-checked="false">12h-14h</button>
+  </div>
+
+  <div class="cartao-dia">
+    <h3>quarta</h3>
+    <button class="botao-horario" data-dia="quarta" data-horario="10h-12h" aria-checked="false">10h-12h</button>
+    <button class="botao-horario" data-dia="quarta" data-horario="14h-16h" aria-checked="false">14h-16h</button>
+    <button class="botao-horario" data-dia="quarta" data-horario="18h-20h" aria-checked="false">18h-20h</button>
+  </div>
+  <div class="cartao-dia">
+    <h3>quinta</h3>
+    <button class="botao-horario" data-dia="quinta" data-horario="09h-11h" aria-checked="false">09h-11h</button>
+    <button class="botao-horario" data-dia="quinta" data-horario="13h-16h" aria-checked="false">13h-16h</button>
+  </div>
+
+  <div class="cartao-dia">
+    <h3>sexta</h3>
+    <button class="botao-horario" data-dia="sexta" data-horario="08h-11h" aria-checked="false">08h-11h</button>
+    <button class="botao-horario" data-dia="sexta" data-horario="15h-18h" aria-checked="false">15h-18h</button>
+  </div>
+  <div class="cartao-dia">
+    <h3>sábado</h3>
+    <button class="botao-horario" data-dia="sábado" data-horario="09h-12h" aria-checked="false">09h-12h</button>
+  </div>
+
+  <div class="cartao-dia">
+    <h3>domingo</h3>
+    <button class="botao-horario" disabled style="opacity:0.5; cursor:not-allowed;">Fechado</button>
+  </div>
+</div>
+
+  <button class="botao-prosseguir" id="prosseguir" disabled>prosseguir</button>
+</div>
+
+<script>
+  const botoes = document.querySelectorAll('.botao-horario');
+  const botaoProsseguir = document.getElementById('prosseguir');
+  let horarioSelecionado = null;
+
+  botoes.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      botoes.forEach(b=>b.setAttribute('aria-checked','false'));
+      btn.setAttribute('aria-checked','true');
+      horarioSelecionado = {dia:btn.dataset.dia, horario:btn.dataset.horario};
+      botaoProsseguir.disabled = false;
+    });
+  });
+
+  botaoProsseguir.addEventListener('click', ()=>{
+    if(!horarioSelecionado) return;
+    const params = new URLSearchParams(horarioSelecionado).toString();
+    window.location.href = 'pagina2.html?' + params;
+  });
+</script>
+</body>
+</html>

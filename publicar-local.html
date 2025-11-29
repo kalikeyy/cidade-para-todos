@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publicar Local</title>
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="publicar-local.css">
+</head>
+<body>
+
+        <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+
+<div class="container">
+
+    <h2>Publicar Local</h2>
+
+    <label>Nome do local:</label>
+    <input type="text" id="nome" placeholder="digite nome do local">
+
+    <label>Endereço:</label>
+    <input type="text" id="endereco" placeholder="digite o endereço">
+
+    <label>Descrição:</label>
+    <textarea id="descricao" placeholder="digite a descrição"></textarea>
+
+    <label>Horário de funcionamento:</label>
+    <textarea id="horario" placeholder="digite o horario de funcionamento"></textarea>
+
+    <label>Imagem do local:</label>
+    <input type="file" id="imagem" accept="image/*">
+
+    <div class="grupo-acess">
+        <h3>Acessibilidade Física (PCD)</h3>
+        <textarea id="acess_pcd" placeholder="digite os tipos de acessibilidade"></textarea>
+    </div>
+
+    <div class="grupo-acess">
+        <h3>Acessibilidade para Idosos</h3>
+        <textarea id="acess_idosos" placeholder="digite..."></textarea>
+    </div>
+
+    <div class="grupo-acess">
+        <h3>Acessibilidade para Estrangeiros / Surdos</h3>
+        <textarea id="acess_estrangeiros" placeholder="digite..."></textarea>
+    </div>
+
+    <button class="publicar-btn" onclick="publicarLocal()">PUBLICAR</button>
+</div>
+
+<div class="resultado" id="resultado"></div>
+
+<script>
+function publicarLocal() {
+    let nome = document.getElementById("nome").value;
+    let endereco = document.getElementById("endereco").value;
+    let descricao = document.getElementById("descricao").value;
+    let horario = document.getElementById("horario").value;
+
+    let pcd = document.getElementById("acess_pcd").value;
+    let idosos = document.getElementById("acess_idosos").value;
+    let estrangeiros = document.getElementById("acess_estrangeiros").value;
+
+    let imagemInput = document.getElementById("imagem").files[0];
+    let resultado = document.getElementById("resultado");
+
+    if (!nome || !endereco || !descricao) {
+        alert("Preencha pelo menos nome, endereço e descrição!");
+        return;
+    }
+
+    let imagemURL = "";
+    if (imagemInput) {
+        imagemURL = URL.createObjectURL(imagemInput);
+    }
+
+    resultado.style.display = "block";
+    resultado.innerHTML = `
+        <h3>${nome}</h3>
+        ${imagemURL ? `<img src="${imagemURL}" alt="Imagem do local">` : ""}
+        <p><strong>Endereço:</strong> ${endereco}</p>
+        <p><strong>Descrição:</strong> ${descricao}</p>
+        <p><strong>Horário:</strong> ${horario}</p>
+
+        <h4>Acessibilidade Física (PCD)</h4>
+        <p>${pcd || "Não informado."}</p>
+
+        <h4>Acessibilidade para Idosos</h4>
+        <p>${idosos || "Não informado."}</p>
+
+        <h4>Acessibilidade para Estrangeiros / Surdos</h4>
+        <p>${estrangeiros || "Não informado."}</p>
+    `;
+
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>

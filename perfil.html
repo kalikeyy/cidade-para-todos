@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil-Portal de Acessibilidade</title>
+ <link rel="stylesheet" href="perfil.css" />
+ <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+  
+<div class="conteiner">
+    <div class="topo-perfil">
+        <h1>Meu Perfil</h1>
+        <button class="botao-config" onclick="abrirConfiguracoes()">Configurações</button>
+    </div>
+
+    <div class="caixa-perfil">
+        <img id="fotoPerfil" src="perfil-img.png" alt="Foto de perfil">
+
+        <div class="informacoes">
+            <h2 id="nomePerfil">Ana Oliveira</h2>
+            <p id="emailPerfil">Email: ana.oliveira@example.com</p>
+            <p id="telefonePerfil">Telefone: (41) 98452-1920</p>
+            <p id="usuarioPerfil">Usuário: ana_oliveira</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function abrirConfiguracoes() {
+    window.location.href = "configuracao.html"; 
+}
+</script>
+
+</body>
+</html>

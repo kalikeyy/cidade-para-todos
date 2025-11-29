@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurante Jardim-Portal de Acessibilidade</title>
+ <link rel="stylesheet" href="informacao.css">
+ <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+  
+<div class="container">
+    <div class="cartao-info">
+        <img src="Restaurante Jardim.jpg" style="width:50%;border-radius:10px;">
+
+        <div class="dados">
+            <div class="titulo-secao">INFORMAÇÕES GERAIS</div>
+
+            <p><strong>NOME:</strong>Restaurante Jardim</p>
+            <p><strong>ENDEREÇO:</strong>Rua das Acácias, 210</p>
+            <p><strong>HORÁRIO:</strong> Seg-Sex 08h às 20h | Sáb-Dom 09h às 18h</p>
+            <p><strong>TELEFONE:</strong>(41) 3011-5598</p>
+            <p><strong>CATEGORIA:</strong>Restaurante / Comida brasileira</p>
+        </div>
+    </div>
+
+    <div class="titulo-secao">ACESSIBILIDADE DO LOCAL</div>
+
+    <div class="grade-3">
+        <div class="caixa">
+            <ul>
+                <li>Acessibilidade PCD</li>
+                <li>Entrada com rampa</li>
+                <li>Porta larga (87 cm)</li>
+                <li>Banheiro adaptado</li>
+                <li>Mesas acessíveis</li>
+                <li>Piso nivelado</li>
+                <li>2 vagas PCD</li>
+            </ul>
+        </div>
+
+        <div class="caixa">
+            <ul>
+                <li>Acessibilidade para Idosos</li>
+                <li>Assentos com encosto</li>
+                <li>Fila preferencial</li>
+                <li>Boa iluminação</li>
+                <li>Sinalização clara</li>
+            </ul>
+        </div>
+
+        <div class="caixa">
+            <ul>
+                <li>Estrangeiros/Surdos</li>
+                <li>Cardápio em Português e Inglês</li>
+                <li>Atendimento básico em Libras</li>
+                <li>Cardápio com símbolos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="avaliacao">
+        <div class="titulo-secao">AVALIAÇÃO</div>
+
+        <div class="estrelas" id="estrelas">
+            <span class="estrela" data-valor="1">★</span>
+            <span class="estrela" data-valor="2">★</span>
+            <span class="estrela" data-valor="3">★</span>
+            <span class="estrela" data-valor="4">★</span>
+            <span class="estrela" data-valor="5">★</span>
+        </div>
+
+        <textarea id="comentario" placeholder="Escreva seu comentário..."></textarea>
+
+        <button onclick="limparCampos()">Enviar</button>
+    </div>
+
+</div>
+
+<script>
+let notaSelecionada = 0;
+
+document.querySelectorAll(".estrela").forEach(estrela => {
+    estrela.addEventListener("click", function () {
+        notaSelecionada = Number(this.dataset.valor);
+
+        document.querySelectorAll(".estrela").forEach(e => e.classList.remove("selecionada"));
+        for (let i = 0; i < notaSelecionada; i++) {
+            document.querySelectorAll(".estrela")[i].classList.add("selecionada");
+        }
+    });
+});
+
+function limparCampos() {
+    document.getElementById("comentario").value = "";
+    document.querySelectorAll(".estrela").forEach(e => e.classList.remove("selecionada"));
+    notaSelecionada = 0;
+}
+</script>
+
+</body>
+</html>

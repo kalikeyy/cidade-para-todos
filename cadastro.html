@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro-Portal de Acessibilidade</title>
+  <link rel="stylesheet" href="cadastro.css" />
+   <link rel="stylesheet" href="menu-index.css">
+</head>
+<body>
+
+   <nav>
+  <div class="menu-esquerda">
+    <a href="index.html">Bem-vindo</a>
+    <a href="index.html">Sobre nós</a>
+    <a href="index.html">Serviços</a>
+  </div>
+
+  <div class="menu-direita-container">
+    <div class="menu-direita">
+      <a href="cadastro.html" class="cadastro">Cadastro</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+</nav>
+
+  <div class="caixa">
+    <h2>Crie sua Conta</h2>
+
+    <form onsubmit="return false;">
+      <label for="nome-completo">Nome Completo</label>
+      <input type="text" id="nome-completo" required placeholder="Digite seu nome de usuário">
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" required placeholder="Seu email">
+
+      <label for="telefone">Telefone</label>
+      <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" required placeholder="Sua senha">
+
+      <label for="confirmar-senha">Confirmar Senha</label>
+      <input type="password" id="confirmar-senha" required placeholder="Sua senha">
+
+      <button type="button" onclick="cadastrarUsuario()">Cadastrar</button>
+    </form>
+
+    <p id="mensagem" class="mensagem"></p>
+
+    <div class="link-login">
+      <a href="login.html">Já tem uma conta? Entrar</a>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<script>
+  async function cadastrarUsuario() {
+    const nome = document.getElementById('nome-completo').value;
+    const email = document.getElementById('email').value;
+    const telefone = document.getElementById('telefone').value;
+    const senha = document.getElementById('senha').value;
+    const confirmar = document.getElementById('confirmar-senha').value;
+    const msg = document.getElementById('mensagem');
+
+    msg.innerText = "Enviando dados...";
+    msg.style.color = "#ccc";
+
+    try {
+      const resposta = await window.pywebview.api.cadastrar(nome, email, telefone, senha, confirmar);
+      
+      msg.style.color = resposta.startsWith("✅") ? "lime" : "red";
+      msg.innerText = resposta;
+
+    } catch (error) {
+      msg.style.color = "red";
+      msg.innerText = "❌ Erro ao conectar com o sistema.";
+      console.error(error);
+    }
+  }
+</script>

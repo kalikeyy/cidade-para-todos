@@ -1,0 +1,101 @@
+:root {
+    --fundo: #1e1e1e;
+    --azul: #15438A;
+    --azul-escuro: #0f3264;
+    --texto: #ffffff;
+    --input: #e7e7e7;
+    --botao: #ff8b1f;
+    --botao-hover: #ffab50;
+}
+
+body {
+    background: var(--fundo);
+    font-family: Arial, sans-serif;
+    color: var(--texto);
+}
+
+.container {
+    background: var(--azul);
+    padding: 25px;
+    border-radius: 12px;
+    width: 750px;
+    max-width: 95%;
+    margin: auto;
+    margin-top: 130px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    background: var(--input);
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    margin-top: 5px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+.grupo-acess {
+    background: var(--azul-escuro);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.publicar-btn {
+    background: var(--botao);
+    width: 100%;
+    padding: 12px;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+.publicar-btn:hover {
+    background: var(--botao-hover);
+}
+
+.resultado {
+    margin-top: 40px;
+    background: #ffffff15;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+.resultado h3 {
+    margin-top: 0;
+}
+
+.resultado img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+    textarea {
+        height: 80px;
+    }
+}

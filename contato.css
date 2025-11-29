@@ -1,0 +1,135 @@
+:root {
+    --fundo: #1e1e1e;
+    --azul: #2d73cb;
+    --azul-escuro: #2d73cb;
+    --texto: #ffffff;
+    --input: #e7e7e7;
+    --botao: #ff8b1f;
+    --botao-hover: #ffab50;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fundo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--texto);
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+}
+
+.formulario {
+    background: var(--azul-escuro);
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: var(--texto);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: var(--texto);
+}
+
+.campo input,
+.campo textarea {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: var(--input);
+    color: #000;
+}
+
+.campo textarea {
+    height: 130px;
+    resize: vertical;
+}
+
+.limite {
+    font-size: 13px;
+    text-align: right;
+    margin-top: 5px;
+    color: #cfcfcf;
+}
+
+.botao {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--texto);
+    background: var(--botao);
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: var(--botao-hover);
+}
+
+.botao-voltar {
+    display: inline-block;
+    background: var(--azul);
+    color: var(--texto);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.botao-voltar:hover {
+    background: var(--azul-escuro);
+}
+
+
+@media (max-width: 600px) {
+    .formulario {
+        padding: 20px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .campo input,
+    .campo textarea {
+        font-size: 15px;
+    }
+
+    .botao {
+        font-size: 16px;
+        padding: 12px;
+    }
+}

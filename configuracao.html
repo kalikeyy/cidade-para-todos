@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurações - Portal de Acessibilidade</title>
+ <link rel="stylesheet" href="configuracao.css">
+ <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <nav>
+    <div class="nav-esquerda">
+      <a href="inicio.html" class="logo">
+         <img src="logo.png" alt="Logo">
+
+      <div class="menu-botoes">
+        <a href="inicio.html">inicio</a>
+        <a href="local.html">local</a>
+        <a href="publicacoes.html">publicação</a>
+        <a href="servicos.html">serviços</a>
+        <a href="agenda.html">agenda</a>
+      </div>
+    </div>
+
+      <a href="perfil.html" class="perfil">
+        <img src="perfil.png" alt="Perfil">
+      </a>
+    </div>
+  </nav>
+
+<div class="conteiner">
+    <h2>Configurações do Perfil</h2>
+
+    <label class="etiqueta">Nome de Usuário</label>
+    <input class="entrada" type="text" placeholder="Digite seu nome de usuário">
+
+    <label class="etiqueta">Email</label>
+    <input class="entrada" type="email" placeholder="Seu email">
+
+    <label class="etiqueta">Telefone</label>
+    <input class="entrada" type="text" placeholder="(00) 00000-0000" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+    <label class="etiqueta">Senha</label>
+    <input class="entrada" type="password" placeholder="Sua senha">
+
+    <div class="caixa-botoes">
+        <button class="botao botao-salvar">Salvar</button>
+        <button class="botao botao-cancelar" onclick="voltarPerfil()">Cancelar</button>
+    </div>
+</div>
+
+<script>
+function voltarPerfil() {
+    window.location.href = "perfil.html";
+}
+</script>
+
+</body>
+</html>
