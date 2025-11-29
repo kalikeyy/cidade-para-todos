@@ -1,0 +1,263 @@
+usuarios = []
+
+def sistema_cadastro():
+    print("\n===== Sistema de Cadastro =====")
+
+    while True:
+        nome = input("Nome completo (máx. 50 caracteres): ")
+        if nome.replace(" ", "").isalpha() and len(nome) <= 50:
+            break
+        elif len(nome) > 50:
+            print("Nome muito longo!")
+        else:
+            print("Digite apenas letras.")
+
+    while True:
+        telefone = input("Telefone (máx. 15 caracteres): ")
+        if telefone.isdigit() and len(telefone) <= 15:
+            break
+        print("Telefone inválido!")
+
+    while True:
+        email = input("E-mail (máx. 50 caracteres): ")
+        if email and len(email) <= 50:
+            break
+        print("E-mail inválido!")
+
+    while True:
+        senha = input("Senha (máx. 10 caracteres): ")
+        if senha and len(senha) <= 10:
+            break
+        print("Senha inválida!")
+
+    while True:
+        confirmar_senha = input("Confirme sua senha: ")
+        if confirmar_senha == senha:
+            break
+        print("As senhas não coincidem!")
+
+    usuario = {
+        "nome": nome,
+        "telefone": telefone,
+        "email": email,
+        "senha": senha
+    }
+
+    usuarios.append(usuario)
+    print(f"\nUsuário {nome} cadastrado com sucesso!")
+
+
+def sistema_login():
+    print("\n===== LOGIN =====")
+    email = input("Digite seu e-mail: ")
+    senha = input("Digite sua senha: ")
+
+    for usuario in usuarios:
+        if usuario["email"] == email and usuario["senha"] == senha:
+            print(f"\nLogin realizado com sucesso! Bem-vindo(a), {usuario['nome']}!")
+            return usuario
+
+    print("\nE-mail ou senha incorretos!")
+    return None
+
+
+publicacoes = []
+
+def criar_publicacao(usuario):
+    print("\n===== PUBLICAR LOCAL ACESSÍVEL =====")
+
+    nome_local = input("Nome do local: ")
+    endereco = input("Endereço: ")
+    descricao = input("Descrição do local: ")
+    horario = input("Horário de funcionamento: ")
+
+    print("\n--- Informações de acessibilidade ---")
+    deficiente = input("Descreva os recursos de acessibilidade para pessoas com deficiência: ")
+    idosos = input("Descreva os recursos de acessibilidade para idosos: ")
+    estrangeiros = input("Descreva os recursos de acessibilidade para estrangeiros: ")
+
+    publicacao = {
+        "autor": usuario["nome"],
+        "nome_local": nome_local,
+        "endereco": endereco,
+        "descricao": descricao,
+        "horario": horario,
+        "acessibilidade": {
+            "deficiente": deficiente,
+            "idosos": idosos,
+            "estrangeiros": estrangeiros
+        },
+        "avaliacoes": []
+    }
+
+    publicacoes.append(publicacao)
+    print("\nLocal publicado com sucesso!")
+
+
+def listar_publicacoes():
+    if not publicacoes:
+        print("\nNenhuma publicação encontrada.")
+        return
+
+    print("\n===== LISTA DE LOCAIS PUBLICADOS =====")
+    for i, pub in enumerate(publicacoes, start=1):
+        print(f"\n--- Publicação #{i} ---")
+        print(f"Local: {pub['nome_local']}")
+        print(f"Endereço: {pub['endereco']}")
+        print(f"Descrição: {pub['descricao']}")
+        print(f"Horário: {pub['horario']}")
+        print(f"Autor: {pub['autor']}")
+        print("\nAcessibilidade:")
+        print(f" - Pessoas com deficiência: {pub['acessibilidade']['deficiente']}")
+        print(f" - Idosos: {pub['acessibilidade']['idosos']}")
+        print(f" - Estrangeiros: {pub['acessibilidade']['estrangeiros']}")
+        print("\nAvaliações:")
+        if pub["avaliacoes"]:
+            for av in pub["avaliacoes"]:
+                print(f"  ⭐ {av['estrelas']} — {av['comentario']}")
+        else:
+            print("  Nenhuma avaliação ainda.")
+
+
+def listar_publicacoes_mini():
+    for i, pub in enumerate(publicacoes, start=1):
+        print(f"{i} — {pub['nome_local']} ({pub['endereco']}) — Autor: {pub['autor']}")
+
+
+def avaliar_publicacao():
+    if not publicacoes:
+        print("\nNenhuma publicação encontrada.")
+        return
+
+    print("\n===== AVALIAR LOCAL =====")
+    listar_publicacoes_mini()
+
+    try:
+        escolha = int(input("Escolha o número da publicação para avaliar: ")) - 1
+        if escolha < 0 or escolha >= len(publicacoes):
+            print("Escolha inválida!")
+            return
+    except:
+        print("Entrada inválida!")
+        return
+
+    publicacao = publicacoes[escolha]
+
+    while True:
+        try:
+            estrelas = int(input("Quantas estrelas (1 a 5)? "))
+            if 1 <= estrelas <= 5:
+                break
+            else:
+                print("Digite entre 1 e 5.")
+        except:
+            print("Digite um número válido.")
+
+    comentario = input("Comentário sobre o local: ")
+
+    publicacao["avaliacoes"].append({"estrelas": estrelas, "comentario": comentario})
+    print("\nObrigado pela avaliação!")
+
+
+def editar_publicacao(usuario):
+    if not publicacoes:
+        print("\nNenhuma publicação encontrada.")
+        return
+
+    print("\n===== EDITAR PUBLICAÇÃO =====")
+    listar_publicacoes_mini()
+
+    try:
+        escolha = int(input("Escolha o número da publicação para editar: ")) - 1
+        pub = publicacoes[escolha]
+    except:
+        print("Escolha inválida!")
+        return
+
+    if pub["autor"] != usuario["nome"]:
+        print("Você só pode editar suas próprias publicações!")
+        return
+
+    print("\nDeixe em branco para manter o valor atual.")
+    novo_nome = input(f"Nome ({pub['nome_local']}): ")
+    novo_endereco = input(f"Endereço ({pub['endereco']}): ")
+    nova_descricao = input(f"Descrição ({pub['descricao']}): ")
+    novo_horario = input(f"Horário ({pub['horario']}): ")
+    deficiente = input(f"Acessibilidade para deficientes ({pub['acessibilidade']['deficiente']}): ")
+    idosos = input(f"Acessibilidade para idosos ({pub['acessibilidade']['idosos']}): ")
+    estrangeiros = input(f"Acessibilidade para estrangeiros ({pub['acessibilidade']['estrangeiros']}): ")
+
+    if novo_nome: pub['nome_local'] = novo_nome
+    if novo_endereco: pub['endereco'] = novo_endereco
+    if nova_descricao: pub['descricao'] = nova_descricao
+    if novo_horario: pub['horario'] = novo_horario
+    if deficiente: pub['acessibilidade']['deficiente'] = deficiente
+    if idosos: pub['acessibilidade']['idosos'] = idosos
+    if estrangeiros: pub['acessibilidade']['estrangeiros'] = estrangeiros
+
+    print("\nPublicação atualizada com sucesso!")
+
+
+def excluir_publicacao(usuario):
+    if not publicacoes:
+        print("\nNenhuma publicação encontrada.")
+        return
+
+    print("\n===== EXCLUIR PUBLICAÇÃO =====")
+    listar_publicacoes_mini()
+
+    try:
+        escolha = int(input("Escolha o número da publicação para excluir: ")) - 1
+        pub = publicacoes[escolha]
+    except:
+        print("Escolha inválida!")
+        return
+
+    if pub["autor"] != usuario["nome"]:
+        print("Você só pode excluir suas próprias publicações!")
+        return
+
+    confirm = input(f"Tem certeza que deseja excluir '{pub['nome_local']}'? (sim/nao): ").lower()
+    if confirm == "sim":
+        publicacoes.pop(escolha)
+        print("Publicação excluída com sucesso!")
+    else:
+        print("Exclusão cancelada.")
+
+
+def menu_principal(usuario):
+    while True:
+        print("\n===== MENU PRINCIPAL =====")
+        print("1 - Criar publicação")
+        print("2 - Avaliar um local")
+        print("3 - Ver locais publicados")
+        print("4 - Editar publicação")
+        print("5 - Excluir publicação")
+        print("0 - Sair")
+
+        opcao = input("Escolha: ")
+
+        if opcao == "1":
+            criar_publicacao(usuario)
+        elif opcao == "2":
+            avaliar_publicacao()
+        elif opcao == "3":
+            listar_publicacoes()
+        elif opcao == "4":
+            editar_publicacao(usuario)
+        elif opcao == "5":
+            excluir_publicacao(usuario)
+        elif opcao == "0":
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida!")
+
+
+
+if __name__ == "__main__":
+    sistema_cadastro()
+    usuario_logado = sistema_login()
+
+    if usuario_logado:
+        menu_principal(usuario_logado)
