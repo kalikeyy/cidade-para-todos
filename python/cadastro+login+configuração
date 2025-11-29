@@ -1,0 +1,130 @@
+def sistema_cadastro():
+    usuarios = []
+
+    print("\n===== Sistema de Usuários =====")
+
+    while True:
+        nome = input("Nome completo (máx. 50 caracteres): ")
+        if nome.replace(" ", "").isalpha() and len(nome) <= 50:
+            break
+        elif len(nome) > 50:
+            print("Nome muito longo!")
+        else:
+            print("Digite apenas letras.")
+
+    while True:
+        telefone = input("Telefone (máx. 15 caracteres): ")
+        if telefone.isdigit() and len(telefone) <= 15:
+            break
+        print("Telefone inválido! Digite apenas números e não ultrapasse 15 caracteres.")
+
+    while True:
+        email = input("E-mail (máx. 50 caracteres): ")
+        if email and len(email) <= 50:
+            break
+        print("E-mail inválido! Preencha corretamente e não ultrapasse 50 caracteres.")
+
+    while True:
+        senha = input("Senha (máx. 10 caracteres): ")
+        if senha and len(senha) <= 10:
+            break
+        print("Senha inválida! Preencha corretamente e não ultrapasse 10 caracteres.")
+
+    while True:
+        confirmar_senha = input("Confirme sua senha (máx. 10 caracteres): ")
+        if confirmar_senha == senha:
+            break
+        print("As senhas não coincidem! Tente novamente!")
+
+    usuario = {
+        "nome": nome,
+        "telefone": telefone,
+        "email": email,
+        "senha": senha
+    }
+
+    usuarios.append(usuario)
+    print(f"\nUsuário {nome} cadastrado com sucesso!")
+
+    return usuarios
+
+
+def sistema_login(usuarios):
+    print("\n===== LOGIN =====")
+    email = input("Digite seu e-mail: ")
+    senha = input("Digite sua senha: ")
+
+    for usuario in usuarios:
+        if usuario["email"] == email and usuario["senha"] == senha:
+            print(f"\nLogin realizado com sucesso! Bem-vindo(a), {usuario['nome']}!")
+            return usuario
+
+    print("\nE-mail ou senha incorretos!")
+    return None
+
+
+def configuracoes(usuario):
+    while True:
+        print("\n===== CONFIGURAÇÕES =====")
+        print("1 - Alterar Nome")
+        print("2 - Alterar Telefone")
+        print("3 - Alterar E-mail")
+        print("4 - Alterar Senha")
+        print("0 - Sair das Configurações")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            while True:
+                novo_nome = input("Novo nome (máx. 50 caracteres): ")
+                if novo_nome.replace(" ", "").isalpha() and len(novo_nome) <= 50:
+                    usuario["nome"] = novo_nome
+                    print("Nome atualizado com sucesso!")
+                    break
+                print("Nome inválido! Digite apenas letras e até 50 caracteres.")
+
+        elif opcao == "2":
+            while True:
+                novo_telefone = input("Novo telefone (máx. 15 números): ")
+                if novo_telefone.isdigit() and len(novo_telefone) <= 15:
+                    usuario["telefone"] = novo_telefone
+                    print("Telefone atualizado com sucesso!")
+                    break
+                print("Telefone inválido!")
+
+        elif opcao == "3":
+            while True:
+                novo_email = input("Novo e-mail (máx. 50 caracteres): ")
+                if novo_email and len(novo_email) <= 50:
+                    usuario["email"] = novo_email
+                    print("E-mail atualizado com sucesso!")
+                    break
+                print("E-mail inválido!")
+
+        elif opcao == "4":
+            while True:
+                nova_senha = input("Nova senha (máx. 10 caracteres): ")
+                if nova_senha and len(nova_senha) <= 10:
+                    confirmar = input("Confirme a nova senha: ")
+                    if confirmar == nova_senha:
+                        usuario["senha"] = nova_senha
+                        print("Senha atualizada com sucesso!")
+                        break
+                    print("As senhas não coincidem!")
+                else:
+                    print("Senha inválida!")
+
+        elif opcao == "0":
+            print("Saindo das configurações...")
+            break
+
+        else:
+            print("Opção inválida! Tente novamente.")
+
+
+if __name__ == "__main__":
+    usuarios = sistema_cadastro()      
+    usuario_logado = sistema_login(usuarios) 
+
+    if usuario_logado:
+        configuracoes(usuario_logado) 
