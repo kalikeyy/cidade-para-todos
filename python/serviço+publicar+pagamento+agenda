@@ -1,0 +1,273 @@
+usuarios = []       
+servicos = []        
+agenda_reservas = [] 
+
+def cadastro_usuario():
+    print("\n===== CADASTRO - USUÁRIO (Serviços) =====")
+    while True:
+        nome = input("Nome completo (máx. 50 caracteres): ").strip()
+        if nome and len(nome) <= 50 and nome.replace(" ", "").isalpha():
+            break
+        print("Nome inválido! Use apenas letras e até 50 caracteres.")
+
+    while True:
+        telefone = input("Telefone (máx. 15 dígitos): ").strip()
+        if telefone.isdigit() and len(telefone) <= 15:
+            break
+        print("Telefone inválido!")
+
+    while True:
+        email = input("E-mail (máx. 50 caracteres ): ").strip()
+        if email and len(email) <= 50:
+            if any(u["email"] == email for u in usuarios):
+                print("E-mail já cadastrado. Use outro ou faça login.")
+            else:
+                break
+        print("E-mail inválido!")
+
+    while True:
+        senha = input("Senha (máx. 10 caracteres): ").strip()
+        if senha and len(senha) <= 10:
+            confirmar = input("Confirme a senha: ").strip()
+            if confirmar == senha:
+                break
+            print("Senhas não batem.")
+        else:
+            print("Senha inválida!")
+
+    usuario = {
+        "nome": nome,
+        "telefone": telefone,
+        "email": email,
+        "senha": senha
+    }
+    usuarios.append(usuario)
+    print(f"\nUsuário '{nome}' cadastrado com sucesso!")
+
+
+def login_usuario():
+    print("\n===== LOGIN - USUÁRIO (Serviços) =====")
+    email = input("E-mail: ").strip()
+    senha = input("Senha: ").strip()
+
+    for u in usuarios:
+        if u["email"] == email and u["senha"] == senha:
+            print(f"\nLogin bem-sucedido! Bem-vindo(a), {u['nome']}!")
+            return u
+
+    print("\nE-mail ou senha incorretos.")
+    return None
+
+
+def cadastrar_servico():
+    print("\n===== CADASTRAR SERVIÇO =====")
+    nome_servico = input("Nome do serviço: ").strip()
+    prestador = input("Nome do prestador: ").strip()
+    cidade = input("Cidade: ").strip()
+    telefone = input("Telefone do prestador: ").strip()
+    email = input("E-mail do prestador (sem exigir @): ").strip()
+    categoria = input("Categoria (ex: cuidador, acompanhante, guia): ").strip()
+    descricao = input("Descrição do serviço: ").strip()
+
+    def ler_valor(prompt):
+        while True:
+            v = input(prompt).strip().replace(",", ".")
+            try:
+                return float(v)
+            except:
+                print("Digite um número válido.")
+
+    print("\n--- Valores (em R$) ---")
+    valor_acompanhante = ler_valor("Valor acompanhante: R$ ")
+    valor_diaria = ler_valor("Valor diária: R$ ")
+    valor_visita = ler_valor("Valor visita rápida: R$ ")
+
+    print("\n--- Disponibilidade ---")
+    dias = [d.strip().lower() for d in input("Dias disponíveis (ex: segunda,terca): ").split(",") if d.strip()]
+    horarios = [h.strip() for h in input("Horários (ex: 08:00, 14:00): ").split(",") if h.strip()]
+
+    servico = {
+        "id": len(servicos) + 1,
+        "nome_servico": nome_servico,
+        "prestador": prestador,
+        "cidade": cidade,
+        "telefone": telefone,
+        "email": email,
+        "categoria": categoria,
+        "descricao": descricao,
+        "valores": {
+            "acompanhante": valor_acompanhante,
+            "diaria": valor_diaria,
+            "visita": valor_visita
+        },
+        "dias": dias,
+        "horarios": horarios
+    }
+    servicos.append(servico)
+    print(f"\nServiço '{nome_servico}' cadastrado com sucesso (ID {servico['id']})!")
+
+
+def listar_servicos():
+    if not servicos:
+        print("\nNenhum serviço cadastrado.")
+        return
+
+    print("\n===== SERVIÇOS DISPONÍVEIS =====")
+    for s in servicos:
+        print(f"\nID: {s['id']} — {s['nome_servico']} (Prestador: {s['prestador']})")
+        print(f"  Cidade: {s['cidade']} | Categoria: {s['categoria']}")
+        print(f"  Contato: {s['telefone']} | {s['email']}")
+        print(f"  Descrição: {s['descricao']}")
+        print(f"  Valores: Acompanhante R$ {s['valores']['acompanhante']:.2f}, Diária R$ {s['valores']['diaria']:.2f}, Visita R$ {s['valores']['visita']:.2f}")
+        print(f"  Dias: {', '.join(s['dias'])}")
+        print(f"  Horários: {', '.join(s['horarios'])}")
+
+
+def escolher_servico_por_id():
+    listar_servicos()
+    if not servicos:
+        return None
+
+    try:
+        escolha = int(input("\nDigite o ID do serviço que deseja: "))
+    except:
+        print("ID inválido.")
+        return None
+
+    for s in servicos:
+        if s["id"] == escolha:
+            return s
+
+    print("Serviço não encontrado.")
+    return None
+
+
+def reservar_horario(usuario):
+    print("\n===== AGENDAR SERVIÇO =====")
+    servico = escolher_servico_por_id()
+    if not servico:
+        return
+
+    print("\nTipos de serviço:")
+    print(f"1 - Acompanhante — R$ {servico['valores']['acompanhante']:.2f}")
+    print(f"2 - Diária       — R$ {servico['valores']['diaria']:.2f}")
+    print(f"3 - Visita rápida— R$ {servico['valores']['visita']:.2f}")
+
+    tipo_map = {
+        "1": ("Acompanhante", servico['valores']['acompanhante']),
+        "2": ("Diária", servico['valores']['diaria']),
+        "3": ("Visita rápida", servico['valores']['visita'])
+    }
+    escolha_tipo = input("Escolha: ")
+    if escolha_tipo not in tipo_map:
+        print("Opção inválida.")
+        return
+
+    tipo, valor = tipo_map[escolha_tipo]
+
+    print("\nDias disponíveis:")
+    for d in servico["dias"]:
+        print(" -", d)
+    dia = input("Escolha o dia: ").strip().lower()
+    if dia not in servico["dias"]:
+        print("Dia não disponível.")
+        return
+
+    print("\nHorários disponíveis:")
+    for h in servico["horarios"]:
+        ocupado = any(r for r in agenda_reservas if r["servico_id"] == servico["id"] and r["dia"] == dia and r["horario"] == h)
+        print(f" - {h} {'(ocupado)' if ocupado else ''}")
+
+    horario = input("Escolha o horário: ").strip()
+    if horario not in servico["horarios"]:
+        print("Horário inválido.")
+        return
+    if any(r for r in agenda_reservas if r["servico_id"] == servico["id"] and r["dia"] == dia and r["horario"] == horario):
+        print("Horário já reservado!")
+        return
+
+    print("\n===== PAGAMENTO (SIMULADO) =====")
+    print(f"Total: R$ {valor:.2f}")
+
+    nome_pag = input("Nome do titular: ")
+    cpf = input("CPF: ")
+    endereco = input("Endereço: ")
+    numero_cartao = input("Número do cartão: ")
+    validade = input("Validade: ")
+    cvv = input("CVV: ")
+
+    print("\nPagamento aprovado! ✔")
+
+    reserva = {
+        "usuario_email": usuario["email"],
+        "usuario_nome": usuario["nome"],
+        "servico_id": servico["id"],
+        "servico_nome": servico["nome_servico"],
+        "prestador": servico["prestador"],
+        "tipo": tipo,
+        "dia": dia,
+        "horario": horario
+    }
+    agenda_reservas.append(reserva)
+    print("\nReserva criada e adicionada à sua agenda!")
+
+
+def ver_agenda(usuario):
+    print("\n===== MINHA AGENDA =====")
+    encontrou = False
+    for r in agenda_reservas:
+        if r["usuario_email"] == usuario["email"]:
+            encontrou = True
+            print("\n--- RESERVA ---")
+            print(f"Serviço: {r['servico_nome']}")
+            print(f"Prestador: {r['prestador']}")
+            print(f"Tipo: {r['tipo']}")
+            print(f"Dia: {r['dia']} | Horário: {r['horario']}")
+
+    if not encontrou:
+        print("Nenhuma reserva encontrada.")
+
+
+def menu_servicos_modulo(usuario):
+    while True:
+        print("\n===== MENU SERVIÇOS =====")
+        print("1 - Cadastrar serviço")
+        print("2 - Ver serviços disponíveis")
+        print("3 - Agendar serviço")
+        print("4 - Ver minha agenda")
+        print("0 - Sair")
+        op = input("Escolha: ")
+
+        if op == "1":
+            cadastrar_servico()
+        elif op == "2":
+            listar_servicos()
+        elif op == "3":
+            reservar_horario(usuario)
+        elif op == "4":
+            ver_agenda(usuario)
+        elif op == "0":
+            break
+        else:
+            print("Opção inválida.")
+
+
+if __name__ == "__main__":
+    print("=== MÓDULO DE SERVIÇOS ===")
+    while True:
+        print("\n1 - Cadastrar usuário")
+        print("2 - Login")
+        print("0 - Sair")
+        op = input("Escolha: ")
+
+        if op == "1":
+            cadastro_usuario()
+        elif op == "2":
+            usuario = login_usuario()
+            if usuario:
+                menu_servicos_modulo(usuario)
+        elif op == "0":
+            print("Encerrado.")
+            break
+        else:
+            print("Opção inválida.")
